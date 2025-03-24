@@ -224,6 +224,22 @@ public final class LuhnAlgorithms {
   }
 
   /**
+   * Generates a full mod10 valid string number from a given string number.
+   *
+   * <p>It delegates the Luhn check digit calculation to {@link #luhnCheckDigit(long)}.
+   *
+   * <p>The check digit is then added as a trailing digit to the number provided as a parameter.
+   *
+   * <p>As a result of this method, the {@code number} parameter increases its length by 1.
+   *
+   * @param number a {@code long} as number to be used to generate mod10 valid number
+   * @return valid Luhn valid number as {@code long}
+   */
+  private static String luhnFullNumber(String number) {
+    return number + (char)('0' + luhnCheckDigit(number));
+  }
+
+  /**
    * Calculates the Luhn sum based on mod10 algorithm.
    *
    * <p>The {@code multiplier} is required to be {@code 2} in order to calculate a Luhn sum from a
