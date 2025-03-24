@@ -111,7 +111,7 @@ public final class LuhnAlgorithms {
    * @param finalLength an {@code int} to be used as a final length of the result
    * @return random Luhn valid number of {@code length = finalLength}
    */
-  private static long generateLuhn(long lowerBound, long upperBound, int finalLength) {
+  public static long generateLuhn(long lowerBound, long upperBound, int finalLength) {
     if (finalLength == 1) return 0;
     if (finalLength > 18) finalLength = 18;
     return luhnFullNumber(randomWithinRange(lowerBound, upperBound, finalLength));
@@ -128,7 +128,7 @@ public final class LuhnAlgorithms {
    * @param finalLength an {@code int} to be used as a final length of the result
    * @return a random {@code long} generated
    */
-  private static long randomWithinRange(long lowerBound, long upperBound, int finalLength) {
+  public static long randomWithinRange(long lowerBound, long upperBound, int finalLength) {
     lowerBound = fillWithTrailingZeroes(lowerBound, finalLength);
     upperBound = fillWithTrailingNines(upperBound, finalLength);
     return lowerBound + (long) (Math.random() * (upperBound - lowerBound));
@@ -142,7 +142,7 @@ public final class LuhnAlgorithms {
    * @param finalLength defining the length of the result
    * @return the normalised bound as {@code long}
    */
-  private static long fillWithTrailingZeroes(long number, int finalLength) {
+  public static long fillWithTrailingZeroes(long number, int finalLength) {
     return fillWithTrailing(false, number, finalLength);
   }
 
@@ -154,7 +154,7 @@ public final class LuhnAlgorithms {
    * @param finalLength defining the length of the result
    * @return the normalised bound as {@code long}
    */
-  private static long fillWithTrailingNines(long number, int finalLength) {
+  public static long fillWithTrailingNines(long number, int finalLength) {
     return fillWithTrailing(true, number, finalLength);
   }
 
@@ -176,7 +176,7 @@ public final class LuhnAlgorithms {
    * @param finalLength defining the length of the result
    * @return the normalised bound as {@code long}
    */
-  private static long fillWithTrailing(boolean asUpperBound, long number, int finalLength) {
+  public static long fillWithTrailing(boolean asUpperBound, long number, int finalLength) {
     int length = 0;
     long multiplier = 1;
     do {
@@ -202,7 +202,7 @@ public final class LuhnAlgorithms {
    * @param number a {@code long} to be used to calculate the Luhn check digit
    * @return the Luhn check digit as {@code long}
    */
-  private static long luhnCheckDigit(long number) {
+  public static long luhnCheckDigit(long number) {
     long sum = calculateLuhnSum(number, 2);
     return (sum % 10 == 0) ? 0 : (10 - (sum % 10));
   }
@@ -219,7 +219,7 @@ public final class LuhnAlgorithms {
    * @param number a {@code long} as number to be used to generate mod10 valid number
    * @return valid Luhn valid number as {@code long}
    */
-  private static long luhnFullNumber(long number) {
+  public static long luhnFullNumber(long number) {
     return (number * 10) + luhnCheckDigit(number);
   }
 
@@ -234,7 +234,7 @@ public final class LuhnAlgorithms {
    * @param multiplier an {@code int} to be used as a multiplier
    * @return the check sum as {@code long}
    */
-  private static long calculateLuhnSum(long number, int multiplier) {
+  public static long calculateLuhnSum(long number, int multiplier) {
     long sum = 0;
     do {
       long lastDigit = number % 10;
